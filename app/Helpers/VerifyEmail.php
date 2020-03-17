@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 use App\Mail\Mails\Verify\VerifyEmailMail;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class VerifyEmail
@@ -32,6 +33,20 @@ class VerifyEmail
         Mail::to($user->email)->send(new VerifyEmailMail($user));
 
         return $v;
+    }
+
+    private static function getKey(){
+        return \App\Models\Verify\VerifyEmail::where('user_id', Auth::id())
+            ->first()->_key;
+    }
+
+    public static function checkKey($key){
+        if (self::getKey() != $key){
+            return false;
+        }
+
+        return true;
+
     }
 
 }

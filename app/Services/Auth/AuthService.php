@@ -2,9 +2,11 @@
 
 namespace App\Services\Auth;
 
+use App\Helpers\Status;
 use App\Helpers\VerifyEmail;
 use App\Models\Users\UserSpecific;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -19,6 +21,23 @@ class AuthService
         VerifyEmail::verify($user->id);
 
         return $user;
+    }
+
+    public function activate($key)
+    {
+        $v = VerifyEmail::checkKey($key);
+        if ($v === false)
+            return $v;
+
+        $user = User::find(Auth::id());
+        User::where('id', Auth::id())
+            ->update([
+                'activated' => 1,
+                'status' => Status::USERS_ACTIVATED
+            ]);
+        $user->v()->delete();
+
+        return $v;
     }
 
 }

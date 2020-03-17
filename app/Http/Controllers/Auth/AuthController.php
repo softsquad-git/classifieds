@@ -47,8 +47,6 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'name' => Auth::user()->name
-
         ]);
     }
 
@@ -66,7 +64,18 @@ class AuthController extends Controller
 
     public function activate(ActivateRequest $request)
     {
-        //
+        if ($this->repository->find(Auth::id())->activated == 0){
+            $a = $this->service->activate($request->key);
+            if ($a === true) {
+                return response()->json([
+                    'success' => 1
+                ]);
+            }
+        }
+
+        return response()->json([
+            'success' => 0
+        ]);
     }
 
     public function me()

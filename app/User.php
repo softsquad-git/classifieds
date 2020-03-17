@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Classifieds\Classifieds;
 use App\Models\Classifieds\ClassifiedsImages;
 use App\Models\Users\UserSpecific;
+use App\Models\Verify\VerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -48,6 +49,11 @@ class User extends Authenticatable implements JWTSubject
     public function classifiedsImages()
     {
         return $this->hasMany(ClassifiedsImages::class, 'user_id', 'id');
+    }
+
+    public function v()
+    {
+        return $this->hasOne(VerifyEmail::class, 'user_id', 'id');
     }
 
 }

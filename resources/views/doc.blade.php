@@ -125,6 +125,82 @@
             </li>
         </ul>
     </li>
+    <li>
+        <h2>Autoryzacja (aktywacja konta)</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('Auth\AuthController@activate') }}</li>
+            <li>method: POST</li>
+            <li>
+                <strong>params:</strong>
+                <ul>
+                    <li><b>pola wymagane</b></li>
+                    <li>key</li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    Endpoint zwraca success: 1 kiedy aktywacja przebiegnie pomyślnie <br/>
+                    kiedy zostanie zwrócony success: 0 oznacza to że podano nieprawidłowy kod lub użytkownik ma już aktywne konto
+                </p>
+                <strong>response:</strong>
+                <pre id="activate">
+                    <script>
+                        var myData = {
+                            "success": 1,
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('activate').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Zalogowany użytkownik</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('Auth\AuthController@me') }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Zwraca dane aktualnie zalogowanego użytkownika
+                </p>
+                <strong>response:</strong>
+                <pre id="user-logged">
+                    <script>
+                        var myData = {
+                            "data": {
+                                "id": 1,
+                                "name": "Soft",
+                                "last_name": "Squad",
+                                "email": "test@example.pl",
+                                "birthday": "2000-08-30",
+                                "activated": 1,
+                                "status": "ACTIVATED",
+                                "created_at": "2020-03-17T16:22:28.000000Z",
+                                "updated_at": "2020-03-17T16:24:27.000000Z",
+                                "s": {
+                                    "id": 1,
+                                    "user_id": 1,
+                                    "sex": null,
+                                    "avatar_src": "http://127.0.0.1:8000/assets/data/users/avatars/df.jpg",
+                                    "phone": null,
+                                    "city": null,
+                                    "address": null,
+                                    "post_code": null,
+                                    "created_at": "2020-03-17T16:22:28.000000Z",
+                                    "updated_at": "2020-03-17T16:22:28.000000Z"
+                                }
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('user-logged').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
 </ol>
 </body>
 </html>
