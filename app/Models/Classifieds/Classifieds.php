@@ -24,6 +24,7 @@ class Classifieds extends Model
         'number_phone',
         'is_negotiation',
         'is_reservation',
+        'quantity',
         'state',
         'views',
         'status'

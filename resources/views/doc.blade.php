@@ -201,6 +201,346 @@
             </li>
         </ul>
     </li>
+    <li>
+        <h2>Panel użytkownika - dodawanie / edycja ogłoszenia</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@store') }} - Dodaj</li>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@update', ['id' => 'ID']) }} - Edytuj</li>
+            <li>method: POST</li>
+            <li>
+                <strong>params:</strong>
+                <ul>
+                    <li><b>pola wymagane</b></li>
+                    <li>category_id</li>
+                    <li>title</li>
+                    <li>content</li>
+                    <li>contact_person</li>
+                    <li>email</li>
+                    <li>location</li>
+                    <li>type (AUCTION | PRODUCT | AD | AUCTION_PRODUCT)</li>
+                    <li><b>----</b></li>
+                    <li><b>jeśli typ to aukcja</b></li>
+                    <li>starting_price</li>
+                    <li>end_time</li>
+                    <li><b>jeśli typ to produkt lub ogłoszenie</b></li>
+                    <li>price</li>
+                    <li><b>jeśli typ to aukcjo produkt</b></li>
+                    <li>starting_price</li>
+                    <li>end_time</li>
+                    <li>price</li>
+                    <li><b>----</b></li>
+                    <li>number_phone</li>
+                    <li>is_negotiation</li>
+                    <li>is_reservation</li>
+                    <li>quantity</li>
+                    <li>state (NEW | USED | EXHIBITION | DAMAGED)</li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    Zwraca status oraz podstawowe dane dodanego ogłoszenia
+                </p>
+                <strong>response:</strong>
+                <pre id="classifieds-store">
+                    <script>
+                        var myData = {
+                            "success": 1,
+                            "item": {
+                                "email": "test@example.pl",
+                                "user_id": 1,
+                                "category_id": "1",
+                                "title": "First",
+                                "location": "TEST",
+                                "content": "s[pdk[spdpsmdpsmsm[pdspds[pdspdspmpmsdpsdpmpmsdpomdsmpodspomsdpomdspomdspomsdpomds",
+                                "contact_person": "Michał",
+                                "type": "AD",
+                                "is_negotiation": "1",
+                                "is_reservation": "1",
+                                "state": "USED",
+                                "status": "NEW",
+                                "updated_at": "2020-03-18T10:52:46.000000Z",
+                                "created_at": "2020-03-18T10:52:46.000000Z",
+                                "id": 1
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('classifieds-store').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Panel użytkownika - lista ogłoszeń</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@items') }} - Aktywne ogłoszenia</li>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@itemsArchive') }} - Ogłoszenia w archiwum</li>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@itemsWaiting') }} - Oczekujące ogłoszenia</li>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@itemsLocked') }} - Zablokowane ogłoszenia</li>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@itemsPromo') }} - Ogłoszenia promowane</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Zwraca listę ogłoszeń
+                </p>
+                <strong>response:</strong>
+                <pre id="classifieds">
+                    <script>
+                        var myData = {
+                            "data": [
+                                {
+                                    "id": 1,
+                                    "user_id": 1,
+                                    "category_id": 1,
+                                    "title": "First",
+                                    "content": "s[pdk[spdpsmdpsmsm[pdspds[pdspdspmpmsdpsdpmpmsdpomdsmpodspomsdpomdspomdspomsdpomds",
+                                    "contact_person": "Michał",
+                                    "email": "michallosak@gmail.com",
+                                    "type": "AD",
+                                    "starting_price": null,
+                                    "price": null,
+                                    "end_time": null,
+                                    "number_phone": null,
+                                    "is_negotiation": 1,
+                                    "is_reservation": 1,
+                                    "quantity": null,
+                                    "state": "USED",
+                                    "views": 0,
+                                    "status": "PUBLISHED",
+                                    "created_at": "2020-03-18T10:52:46.000000Z",
+                                    "updated_at": "2020-03-18T10:52:46.000000Z",
+                                    "images": [
+                                        {
+                                            "user_id": 1,
+                                            "ad_id": 1,
+                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpeg",
+                                            "extension": ""
+                                        },
+                                        {
+                                            "user_id": 1,
+                                            "ad_id": 1,
+                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                            "extension": ""
+                                        },
+                                        {
+                                            "user_id": 1,
+                                            "ad_id": 1,
+                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                            "extension": ""
+                                        },
+                                        {
+                                            "user_id": 1,
+                                            "ad_id": 1,
+                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                            "extension": ""
+                                        },
+                                        {
+                                            "user_id": 1,
+                                            "ad_id": 1,
+                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                            "extension": ""
+                                        }
+                                    ],
+                                    "user": {
+                                        "id": 1,
+                                        "name": "Soft",
+                                        "last_name": "Squad",
+                                        "email": "michallosak@gmail.com",
+                                        "birthday": "2000-08-30",
+                                        "activated": 0,
+                                        "status": "NEW",
+                                        "created_at": "2020-03-18T10:51:34.000000Z",
+                                        "updated_at": "2020-03-18T10:51:34.000000Z",
+                                        "s": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "sex": null,
+                                            "avatar_src": "http://127.0.0.1:8000/assets/data/users/avatars/df.jpg",
+                                            "phone": null,
+                                            "city": null,
+                                            "address": null,
+                                            "post_code": null,
+                                            "created_at": "2020-03-18T10:51:34.000000Z",
+                                            "updated_at": "2020-03-18T10:51:34.000000Z"
+                                        }
+                                    }
+                                }
+                            ],
+                            "links": {
+                                "first": "http://127.0.0.1:8000/api/user/classifieds?page=1",
+                                "last": "http://127.0.0.1:8000/api/user/classifieds?page=1",
+                                "prev": null,
+                                "next": null
+                            },
+                            "meta": {
+                                "current_page": 1,
+                                "from": 1,
+                                "last_page": 1,
+                                "path": "http://127.0.0.1:8000/api/user/classifieds",
+                                "per_page": 20,
+                                "to": 1,
+                                "total": 1
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('classifieds').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Panel użytkownika - dane konkretnego ogłoszenia</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@item', ['id' => 'ID']) }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Zwraca dane konkretnego ogłoszenia
+                </p>
+                <strong>response:</strong>
+                <pre id="ad-item">
+                    <script>
+                        var myData = {
+                            "data": {
+                                "id": 1,
+                                "user_id": 1,
+                                "category_id": 1,
+                                "title": "First",
+                                "content": "s[pdk[spdpsmdpsmsm[pdspds[pdspdspmpmsdpsdpmpmsdpomdsmpodspomsdpomdspomdspomsdpomds",
+                                "contact_person": "Michał",
+                                "email": "michallosak@gmail.com",
+                                "type": "AD",
+                                "starting_price": null,
+                                "price": null,
+                                "end_time": null,
+                                "number_phone": null,
+                                "is_negotiation": 1,
+                                "is_reservation": 1,
+                                "quantity": null,
+                                "state": "USED",
+                                "views": 0,
+                                "status": "PUBLISHED",
+                                "created_at": "2020-03-18T10:52:46.000000Z",
+                                "updated_at": "2020-03-18T10:52:46.000000Z",
+                                "images": [
+                                    {
+                                        "user_id": 1,
+                                        "ad_id": 1,
+                                        "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpeg",
+                                        "extension": ""
+                                    },
+                                    {
+                                        "user_id": 1,
+                                        "ad_id": 1,
+                                        "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                        "extension": ""
+                                    },
+                                    {
+                                        "user_id": 1,
+                                        "ad_id": 1,
+                                        "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                        "extension": ""
+                                    },
+                                    {
+                                        "user_id": 1,
+                                        "ad_id": 1,
+                                        "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                        "extension": ""
+                                    },
+                                    {
+                                        "user_id": 1,
+                                        "ad_id": 1,
+                                        "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
+                                        "extension": ""
+                                    }
+                                ],
+                                "user": {
+                                    "id": 1,
+                                    "name": "Soft",
+                                    "last_name": "Squad",
+                                    "email": "michallosak@gmail.com",
+                                    "birthday": "2000-08-30",
+                                    "activated": 0,
+                                    "status": "NEW",
+                                    "created_at": "2020-03-18T10:51:34.000000Z",
+                                    "updated_at": "2020-03-18T10:51:34.000000Z",
+                                    "s": {
+                                        "id": 1,
+                                        "user_id": 1,
+                                        "sex": null,
+                                        "avatar_src": "http://127.0.0.1:8000/assets/data/users/avatars/df.jpg",
+                                        "phone": null,
+                                        "city": null,
+                                        "address": null,
+                                        "post_code": null,
+                                        "created_at": "2020-03-18T10:51:34.000000Z",
+                                        "updated_at": "2020-03-18T10:51:34.000000Z"
+                                    }
+                                }
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('ad-item').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Panel użytkownika - archiwum</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@archive', ['id' => 'ID']) }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Endpoint służy do przenoszenia ogłoszenia do archwium oraz usuwania z archiwum <br/>
+                    SUCCESS: 1 - ok <br/>
+                    SUCCESS: 0 - brak takiego ogłoszenia - ERROR
+                </p>
+                <strong>response:</strong>
+                <pre id="ad-archive">
+                    <script>
+                        var myData = {
+                            "success": 1,
+                            "status": "PUBLISHED"
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('ad-archive').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Panel użytkownika - usuwanie</h2>
+        <span>Wymaga autoryzacji</span>
+        <ul>
+            <li>route: {{ action('User\Classifieds\ClassifiedsController@delete', ['id' => 'ID']) }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Endpoint służy do trwalego usunięcia ogłoszenia <br/>
+                    SUCCESS: 1 - ok <br/>
+                    SUCCESS: 0 - brak takiego ogłoszenia - ERROR
+                </p>
+                <strong>response:</strong>
+                <pre id="ad-delete">
+                    <script>
+                        var myData = {
+                            "success": 1,
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('ad-delete').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
 </ol>
 </body>
 </html>

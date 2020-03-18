@@ -24,6 +24,14 @@ class ClassifiedsController extends Controller
         $this->service = $service;
     }
 
+    /*************
+     *
+     *
+     * LIST CLASSIFIEDS
+     *
+     *
+     ************/
+
     public function items(Request $request)
     {
         $search = [
@@ -35,6 +43,59 @@ class ClassifiedsController extends Controller
 
         return ClassifiedsResource::collection($items);
     }
+
+    public function itemsArchive(Request $request){
+        $search = [
+            'category' => $request->input('category'),
+            'title' => $request->input('title')
+        ];
+
+        $items = $this->repository->itemsArchive($search);
+
+        return ClassifiedsResource::collection($items);
+    }
+
+    public function itemsLocked(Request $request){
+        $search = [
+            'category' => $request->input('category'),
+            'title' => $request->input('title')
+        ];
+
+        $items = $this->repository->itemsLocked($search);
+
+        return ClassifiedsResource::collection($items);
+    }
+
+
+    public function itemsWaiting(Request $request){
+        $search = [
+            'category' => $request->input('category'),
+            'title' => $request->input('title')
+        ];
+
+        $items = $this->repository->itemsWaiting($search);
+
+        return ClassifiedsResource::collection($items);
+    }
+
+    public function itemsPromo(Request $request){
+        $search = [
+            'category' => $request->input('category'),
+            'title' => $request->input('title')
+        ];
+
+        $items = $this->repository->itemsPromo($search);
+
+        return ClassifiedsResource::collection($items);
+    }
+
+    /****************
+     *
+     *
+     * END LIST CLASSIFIEDS
+     *
+     *
+     ***************/
 
     public function item($id)
     {
@@ -70,6 +131,24 @@ class ClassifiedsController extends Controller
             return response()->json([
                 'success' => 1,
                 'item' => $item
+            ]);
+        }
+
+        return response()->json([
+            'success' => 0
+        ]);
+    }
+
+    public function archive($id)
+    {
+        $item = $this->repository->find($id);
+        if (!empty($item))
+        {
+            $this->service->archive($item);
+
+            return response()->json([
+                'success' => 1,
+                'status' => $item->status
             ]);
         }
 

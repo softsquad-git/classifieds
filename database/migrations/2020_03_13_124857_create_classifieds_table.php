@@ -19,6 +19,7 @@ class CreateClassifiedsTable extends Migration
             $table->integer('category_id')->index();
             $table->string('title');
             $table->text('content');
+            $table->string('location');
             $table->string('contact_person');
             $table->string('email');
             $table->string('type');
@@ -28,6 +29,7 @@ class CreateClassifiedsTable extends Migration
             $table->string('number_phone')->nullable();
             $table->boolean('is_negotiation')->default(0);
             $table->boolean('is_reservation')->default(0);
+            $table->integer('quantity')->nullable();
             $table->string('state');
             $table->integer('views')->default(0);
             $table->string('status');

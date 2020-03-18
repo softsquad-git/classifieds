@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Classifieds;
 
+use App\Http\Resources\Users\UserResource;
+use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClassifiedsResource extends JsonResource
@@ -14,6 +16,10 @@ class ClassifiedsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $data = parent::toArray($request);
+        $data['images'] = ClassifiedsImagesResource::collection($this->images);
+        $data['user'] = new UserResource(User::find($this->user_id));
+
+        return $data;
     }
 }

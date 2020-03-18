@@ -12,7 +12,9 @@ class ClassifiedsService
 
     public function store(array $data): Classifieds
     {
-        $data['user_id'] = Auth::id()?? 1;$data['views'] = 0;
+        # jeśli ilość $data[quantity] = null produkt jest dostępny bez ograniczeń
+
+        $data['user_id'] = Auth::id();
         $data['status'] = Status::CLASSIFIEDS_NEW;
 
         $item = Classifieds::create($data);
@@ -42,7 +44,7 @@ class ClassifiedsService
             $image->move($b_path, $filename);
             $ad = ClassifiedsImages::create([
                 'classified_id' => $item_id,
-                'user_id' => Auth::id()??1,
+                'user_id' => Auth::id(),
                 'path' => $filename,
                 'extension' => $image->getExtension()
             ]);
@@ -51,6 +53,19 @@ class ClassifiedsService
         }
 
         return $classifieds;
+
+    }
+
+    public function archive(Classifieds $item): Classifieds
+    {
+        if ($item->status == Status::CLASSIFIEDS_ARCHIVE)
+        {
+            $item->update(['status' => Status::CLASSIFIEDS_PUBLISHED]);
+            return $item;
+        }
+
+        $item->update(['status' => Status::CLASSIFIEDS_ARCHIVE]);
+        return $item;
 
     }
 
