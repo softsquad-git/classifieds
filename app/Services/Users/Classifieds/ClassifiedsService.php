@@ -6,6 +6,7 @@ use App\Helpers\Status;
 use App\Models\Classifieds\Classifieds;
 use App\Models\Classifieds\ClassifiedsImages;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ClassifiedsService
 {
@@ -40,7 +41,7 @@ class ClassifiedsService
         $classifieds = [];
         $b_path = config('app.df.src.classifieds');
         foreach ($images as $image) {
-            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $filename = md5(time() . Str::random(32)). '.' . $image->getClientOriginalExtension();
             $image->move($b_path, $filename);
             $ad = ClassifiedsImages::create([
                 'classified_id' => $item_id,

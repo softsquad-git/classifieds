@@ -15,10 +15,7 @@ class ClassifiedsImagesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'user_id' => $this->user_id,
-            'ad_id' => $this->classified_id,
             'path' => asset('assets/data/classifieds/' . $this->path),
-            'extension' => $this->extension
         ];
     }
 }

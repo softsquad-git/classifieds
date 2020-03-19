@@ -17,7 +17,8 @@ class ClassifiedsResource extends JsonResource
     public function toArray($request)
     {
         $data = parent::toArray($request);
-        $data['images'] = ClassifiedsImagesResource::collection($this->images);
+        $data['image'] = $this->getImageList();
+        $data['images']= ClassifiedsImagesResource::collection($this->images);
         $data['user'] = new UserResource(User::find($this->user_id));
 
         return $data;

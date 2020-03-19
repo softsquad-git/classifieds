@@ -273,6 +273,8 @@
     </li>
     <li>
         <h2>Panel użytkownika - lista ogłoszeń</h2>
+        <span><b>Wszędzie gdzie w panelu użytkownika zwracana jest lista ogłoszeń mamy możliwość filtrowania (wyszukiwania)<br/>
+            po kategorii i tytule: | ...?category=CATEGORY_ID&title=Test | </b></span>
         <span>Wymaga autoryzacji</span>
         <ul>
             <li>route: {{ action('User\Classifieds\ClassifiedsController@items') }} - Aktywne ogłoszenia</li>
@@ -291,7 +293,7 @@
                         var myData = {
                             "data": [
                                 {
-                                    "id": 1,
+                                    "id": 2,
                                     "user_id": 1,
                                     "category_id": 1,
                                     "title": "First",
@@ -309,40 +311,10 @@
                                     "state": "USED",
                                     "views": 0,
                                     "status": "PUBLISHED",
-                                    "created_at": "2020-03-18T10:52:46.000000Z",
-                                    "updated_at": "2020-03-18T10:52:46.000000Z",
-                                    "images": [
-                                        {
-                                            "user_id": 1,
-                                            "ad_id": 1,
-                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpeg",
-                                            "extension": ""
-                                        },
-                                        {
-                                            "user_id": 1,
-                                            "ad_id": 1,
-                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
-                                            "extension": ""
-                                        },
-                                        {
-                                            "user_id": 1,
-                                            "ad_id": 1,
-                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
-                                            "extension": ""
-                                        },
-                                        {
-                                            "user_id": 1,
-                                            "ad_id": 1,
-                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
-                                            "extension": ""
-                                        },
-                                        {
-                                            "user_id": 1,
-                                            "ad_id": 1,
-                                            "path": "http://127.0.0.1:8000/assets/data/classifieds/1584528766.jpg",
-                                            "extension": ""
-                                        }
-                                    ],
+                                    "created_at": "2020-03-18T13:51:46.000000Z",
+                                    "updated_at": "2020-03-18T13:51:46.000000Z",
+                                    "image": "http://127.0.0.1:8000/assets/data/classifieds/df.png",
+                                    "images": [],
                                     "user": {
                                         "id": 1,
                                         "name": "Soft",
@@ -517,7 +489,7 @@
         </ul>
     </li>
     <li>
-        <h2>Panel użytkownika - usuwanie</h2>
+        <h2>Panel użytkownika - usuwanie ogłoszenia</h2>
         <span>Wymaga autoryzacji</span>
         <ul>
             <li>route: {{ action('User\Classifieds\ClassifiedsController@delete', ['id' => 'ID']) }}</li>
@@ -536,6 +508,170 @@
                         };
                         var textedJson = JSON.stringify(myData, undefined, 4);
                         document.getElementById('ad-delete').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Lista ogłoszeń | FRONT</h2>
+        <ul>
+            <li>route: {{ action('Front\Classifieds\ClassifiedsController@items') }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Zwraca listę ogłoszeń w serwisie które są dostępne dla sprzedających. <br/>
+                    <b>
+                        Mamy możliwość filtrowania po:
+                        <ul>
+                            <li>tytuł: ?title=sdoinsd</li>
+                            <li>kategoria: ?category=CATEGORY_ID</li>
+                            <li>lokalizacja: ?location=Kraków</li>
+                            <li>typie: ?type=AD | PRODUCT | AUCTION | AUCTION_PRODUCT</li>
+                            <li>query: ...?title=test&category=1&location=Kraków&type=AUCTION</li>
+                        </ul>
+                    </b>
+                </p>
+                <strong>response:</strong>
+                <pre id="classifieds-front">
+                    <script>
+                        var myData = {
+                            "data": [
+                                {
+                                    "id": 2,
+                                    "user_id": 1,
+                                    "category_id": 1,
+                                    "title": "First",
+                                    "content": "s[pdk[spdpsmdpsmsm[pdspds[pdspdspmpmsdpsdpmpmsdpomdsmpodspomsdpomdspomdspomsdpomds",
+                                    "contact_person": "Michał",
+                                    "email": "michallosak@gmail.com",
+                                    "type": "AD",
+                                    "starting_price": null,
+                                    "price": null,
+                                    "end_time": null,
+                                    "number_phone": null,
+                                    "is_negotiation": 1,
+                                    "is_reservation": 1,
+                                    "quantity": null,
+                                    "state": "USED",
+                                    "views": 0,
+                                    "status": "PUBLISHED",
+                                    "created_at": "2020-03-18T13:51:46.000000Z",
+                                    "updated_at": "2020-03-18T13:51:46.000000Z",
+                                    "image": "http://127.0.0.1:8000/assets/data/classifieds/df.png",
+                                    "images": [],
+                                    "user": {
+                                        "id": 1,
+                                        "name": "Soft",
+                                        "last_name": "Squad",
+                                        "email": "michallosak@gmail.com",
+                                        "birthday": "2000-08-30",
+                                        "activated": 0,
+                                        "status": "NEW",
+                                        "created_at": "2020-03-18T10:51:34.000000Z",
+                                        "updated_at": "2020-03-18T10:51:34.000000Z",
+                                        "s": {
+                                            "id": 1,
+                                            "user_id": 1,
+                                            "sex": null,
+                                            "avatar_src": "http://127.0.0.1:8000/assets/data/users/avatars/df.jpg",
+                                            "phone": null,
+                                            "city": null,
+                                            "address": null,
+                                            "post_code": null,
+                                            "created_at": "2020-03-18T10:51:34.000000Z",
+                                            "updated_at": "2020-03-18T10:51:34.000000Z"
+                                        }
+                                    }
+                                }
+                            ],
+                            "links": {
+                                "first": "http://127.0.0.1:8000/api/classifieds?page=1",
+                                "last": "http://127.0.0.1:8000/api/classifieds?page=1",
+                                "prev": null,
+                                "next": null
+                            },
+                            "meta": {
+                                "current_page": 1,
+                                "from": 1,
+                                "last_page": 1,
+                                "path": "http://127.0.0.1:8000/api/classifieds",
+                                "per_page": 20,
+                                "to": 1,
+                                "total": 1
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('classifieds-front').innerHTML = textedJson;
+                    </script>
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>Konkretne ogłoszenie | FRONT</h2>
+        <ul>
+            <li>route: {{ action('Front\Classifieds\ClassifiedsController@item', ['id' => 'ID']) }}</li>
+            <li>method: POST</li>
+            <li>
+                <p>
+                    Endpoint zwraca dane konkretnego ogłoszenia <br/>
+                    SUCCESS: 0 - brak ofert
+                </p>
+                <strong>response:</strong>
+                <pre id="ad-front">
+                    <script>
+                        var myData = {
+                            "data": {
+                                "id": 2,
+                                "user_id": 1,
+                                "category_id": 1,
+                                "title": "First",
+                                "content": "s[pdk[spdpsmdpsmsm[pdspds[pdspdspmpmsdpsdpmpmsdpomdsmpodspomsdpomdspomdspomsdpomds",
+                                "contact_person": "Michał",
+                                "email": "michallosak@gmail.com",
+                                "type": "AD",
+                                "starting_price": null,
+                                "price": null,
+                                "end_time": null,
+                                "number_phone": null,
+                                "is_negotiation": 1,
+                                "is_reservation": 1,
+                                "quantity": null,
+                                "state": "USED",
+                                "views": 0,
+                                "status": "PUBLISHED",
+                                "created_at": "2020-03-18T13:51:46.000000Z",
+                                "updated_at": "2020-03-18T13:51:46.000000Z",
+                                "image": "http://127.0.0.1:8000/assets/data/classifieds/df.png",
+                                "images": [],
+                                "user": {
+                                    "id": 1,
+                                    "name": "Soft",
+                                    "last_name": "Squad",
+                                    "email": "michallosak@gmail.com",
+                                    "birthday": "2000-08-30",
+                                    "activated": 0,
+                                    "status": "NEW",
+                                    "created_at": "2020-03-18T10:51:34.000000Z",
+                                    "updated_at": "2020-03-18T10:51:34.000000Z",
+                                    "s": {
+                                        "id": 1,
+                                        "user_id": 1,
+                                        "sex": null,
+                                        "avatar_src": "http://127.0.0.1:8000/assets/data/users/avatars/df.jpg",
+                                        "phone": null,
+                                        "city": null,
+                                        "address": null,
+                                        "post_code": null,
+                                        "created_at": "2020-03-18T10:51:34.000000Z",
+                                        "updated_at": "2020-03-18T10:51:34.000000Z"
+                                    }
+                                }
+                            }
+                        };
+                        var textedJson = JSON.stringify(myData, undefined, 4);
+                        document.getElementById('ad-front').innerHTML = textedJson;
                     </script>
                 </pre>
             </li>

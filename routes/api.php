@@ -5,6 +5,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('register', 'Auth\AuthController@register');
 });
 
+Route::group(['prefix' => 'classifieds'], function (){
+    Route::post('/', 'Front\Classifieds\ClassifiedsController@items');
+    Route::post('{id}', 'Front\Classifieds\ClassifiedsController@item');
+});
+
 Route::group(['middleware' => 'jwt.auth'], function (){
 
     Route::post('activate', 'Auth\AuthController@activate');
