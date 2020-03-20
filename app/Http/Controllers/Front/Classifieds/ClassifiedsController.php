@@ -39,8 +39,10 @@ class ClassifiedsController extends Controller
     public function item($id)
     {
         $item = $this->repository->find($id);
-        if (!empty($item))
+        if (!empty($item)) {
+            $this->service->view($item);
             return new ClassifiedsResource($item);
+        }
 
         return response()->json([
             'success' => 0

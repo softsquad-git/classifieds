@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/doc-api', function (){
+Route::get('/doc-api', function () {
     return view('doc');
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    include 'admin.web.php';
 });

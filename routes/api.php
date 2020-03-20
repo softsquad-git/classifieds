@@ -10,6 +10,11 @@ Route::group(['prefix' => 'classifieds'], function (){
     Route::post('{id}', 'Front\Classifieds\ClassifiedsController@item');
 });
 
+Route::group(['prefix' => 'categories'], function (){
+    Route::post('/', 'Front\Categories\CategoryController@items');
+    Route::post('{id}', 'Front\Categories\CategoryController@item');
+});
+
 Route::group(['middleware' => 'jwt.auth'], function (){
 
     Route::post('activate', 'Auth\AuthController@activate');
