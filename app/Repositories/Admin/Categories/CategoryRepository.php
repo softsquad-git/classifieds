@@ -32,18 +32,7 @@ class CategoryRepository
 
     public function all()
     {
-        $ids = [];
-        $categories = Category::where('parent_id', 0)->get();
-        foreach ($categories as $category) {
-            array_push($ids, $category->id);
-            foreach ($category->children as $child) {
-                array_push($ids, $child->id);
-            }
-        }
-        $categories = Category::whereIn('id', $ids)
-            ->get();
-
-        return $categories;
+        return Category::all();
     }
 
 }
