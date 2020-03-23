@@ -3,6 +3,7 @@
 namespace App\Models\Classifieds;
 
 use App\Helpers\Image;
+use App\Models\Categories\Category;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,5 +49,15 @@ class Classifieds extends Model
             return Image::getImageAd($image->path);
 
         return Image::getImageAd(Image::DF_FILENAME);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function lock()
+    {
+        return $this->hasOne(ClassifiedsLock::class, 'classified_id', 'id');
     }
 }

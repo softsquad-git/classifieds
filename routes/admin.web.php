@@ -10,3 +10,9 @@ Route::group(['prefix' => 'categories'], function () {
     Route::post('store', 'Admin\Categories\CategoryController@store');
     Route::post('update/{id}', 'Admin\Categories\CategoryController@update');
 });
+
+Route::group(['prefix' => 'classifieds'], function (){
+    Route::get('/', 'Admin\Classifieds\ClassifiedsController@items');
+    Route::get('accept/{id}', 'Admin\Classifieds\ClassifiedsController@accept');
+    Route::post('lock/{id}', 'Admin\Classifieds\ClassifiedsController@lock');
+});

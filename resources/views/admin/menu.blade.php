@@ -13,6 +13,12 @@
                     Kategorie
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ action('Admin\Classifieds\ClassifiedsController@items') }}">
+                    <span class="fa fa-tags"></span>
+                    Ogłoszenia
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

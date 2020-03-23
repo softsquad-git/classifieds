@@ -12,6 +12,7 @@
         font-size: 3.5rem;
     }
 }
+
 .feather {
     width: 16px;
     height: 16px;
@@ -114,16 +115,24 @@
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
+
 .icon-list {
     font-size: 12px;
     margin-right: 10px;
 }
+
 .warning_c {
     color: #ea8c14;
 }
+
 .delete_c {
     color: #fb4545;
 }
+
+.accept_c {
+    color: green;
+}
+
 .page-link {
     position: relative;
     display: block;
@@ -134,9 +143,18 @@
     background-color: #fff;
     border: 1px solid #dee2e6;
 }
+
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
     background-color: #a0a0a0;
     border-color: #a9a9a9;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.w-1 {
+    width: 33px !important
 }
