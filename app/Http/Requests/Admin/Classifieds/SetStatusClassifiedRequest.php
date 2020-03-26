@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Classifieds;
+namespace App\Http\Requests\Admin\Classifieds;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClassifiedsLockRequest extends FormRequest
+class SetStatusClassifiedRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

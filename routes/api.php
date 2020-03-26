@@ -35,3 +35,6 @@ Route::group(['middleware' => 'jwt.auth'], function (){
         });
     });
 });
+Route::group(['prefix' => 'admin'], function () {
+    include 'admin.web.php';
+});

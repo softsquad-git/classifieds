@@ -18,11 +18,9 @@ class ClassifiedsService
         return $item;
     }
 
-    public function lock(array $data, Classifieds $item): ClassifiedsLock
+    public function setStatus(array $data, Classifieds $item): Classifieds
     {
-        $data['classified_id'] = $item->id;
-        $data['user_id'] = $item->user_id;
-        $item = ClassifiedsLock::create($data);
+        $item->update($data);
 
         return $item;
     }

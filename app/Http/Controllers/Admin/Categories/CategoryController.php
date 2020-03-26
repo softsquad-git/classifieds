@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Categories;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\CategoryRequest;
+use App\Http\Resources\Categories\CategoryResource;
+use App\Http\Resources\Classifieds\ClassifiedsResource;
 use App\Repositories\Admin\Categories\CategoryRepository;
 use App\Services\Admin\Categories\CategoryService;
 use Illuminate\Http\Request;
@@ -27,45 +29,19 @@ class CategoryController extends Controller
     {
         $items = $this->repository->items();
 
-        return view('admin.categories.list', [
-            'data' => $items
-        ]);
-    }
-
-    public function create($category_id = 0)
-    {
-        $item = $this->service->category();
-        $categories = $this->repository->all();
-        $item->parent_id = $category_id;
-
-        return view('admin.categories.form', [
-            'item' => $item,
-            'categories' => $categories
-        ]);
+        return CategoryResource::collection($items);
     }
 
     public function store(CategoryRequest $request)
     {
-        $this->service->store($request->all());
+        $item = $this->service->store($request->all());
 
-        return redirect()->action('Admin\Categories\CategoryController@items')
-            ->with('admin.panel.saved');
+        return response()->json([
+            'success' => 1,
+            'item' => $item
+        ]);
     }
 
-    public function edit($id)
-    {
-        $item = $this->repository->find($id);
-        if (!empty($item)) {
-            $categories = $this->repository->all();
-            return view('admin.categories.form', [
-                'item' => $item,
-                'categories' => $categories
-            ]);
-        }
-
-        return redirect()->action('Admin\Categories\CategoryController@items')
-            ->with('admin.panel.not_found');
-    }
 
     public function update(CategoryRequest $request, $id)
     {
@@ -73,12 +49,15 @@ class CategoryController extends Controller
         if (!empty($item)) {
             $this->service->update($request->all(), $item);
 
-            return redirect()->action('Admin\Categories\CategoryController@items')
-                ->with('admin.panel.saved');
+            return response()->json([
+                'success' => 1,
+                'item' => $item
+            ]);
         }
 
-        return redirect()->action('Admin\Categories\CategoryController@items')
-            ->with('admin.panel.not_found');
+        return response()->json([
+            'success' => 0
+        ]);
     }
 
     public function delete($id)
@@ -87,12 +66,30 @@ class CategoryController extends Controller
         if (!empty($item)) {
             $this->service->delete($item);
 
-            return redirect()->action('Admin\Categories\CategoryController@items')
-                ->with('admin.panel.saved');
+            return response()->json([
+                'success' => 1
+            ]);
         }
 
-        return redirect()->action('Admin\Categories\CategoryController@items')
-            ->with('admin.panel.not_found');
+        return response()->json([
+            'success' => 0
+        ]);
+    }
+
+    public function show($id)
+    {
+        $item = $this->repository->find($id);
+        if (!empty($item)) {
+            return ClassifiedsResource::collection($item->classifieds);
+        }
+
+        return response()->json([
+            'success' => 0
+        ]);
+    }
+
+    public function all(){
+        return CategoryResource::collection($this->repository->all());
     }
 
 }

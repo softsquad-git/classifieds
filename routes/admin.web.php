@@ -3,16 +3,21 @@
 Route::get('/', 'Admin\AdminController@panel');
 
 Route::group(['prefix' => 'categories'], function () {
-    Route::get('/', 'Admin\Categories\CategoryController@items');
-    Route::get('create', 'Admin\Categories\CategoryController@create');
-    Route::get('edit/{id}', 'Admin\Categories\CategoryController@edit');
-    Route::get('remove/{id}', 'Admin\Categories\CategoryController@delete');
+    Route::post('/', 'Admin\Categories\CategoryController@items');
+    Route::post('remove/{id}', 'Admin\Categories\CategoryController@delete');
     Route::post('store', 'Admin\Categories\CategoryController@store');
     Route::post('update/{id}', 'Admin\Categories\CategoryController@update');
+    Route::post('show/{id}', 'Admin\Categories\CategoryController@show');
+    Route::post('all', 'Admin\Categories\CategoryController@all');
 });
 
-Route::group(['prefix' => 'classifieds'], function (){
-    Route::get('/', 'Admin\Classifieds\ClassifiedsController@items');
-    Route::get('accept/{id}', 'Admin\Classifieds\ClassifiedsController@accept');
-    Route::post('lock/{id}', 'Admin\Classifieds\ClassifiedsController@lock');
+Route::group(['prefix' => 'classifieds'], function () {
+    Route::post('/', 'Admin\Classifieds\ClassifiedsController@items');
+    Route::post('set-status/{id}', 'Admin\Classifieds\ClassifiedsController@setStatus');
+});
+
+Route::group(['prefix' => 'users'], function () {
+    Route::post('/', 'Admin\Users\UserController@items');
+    Route::post('update/{id}', 'Admin\Users\UserController@update');
+    Route::post('{id}', 'Admin\Users\UserController@item');
 });
